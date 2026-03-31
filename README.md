@@ -5,10 +5,6 @@ git clone :: `https://github.com/dammar093/assessment.git`
 
 # For frontend
 
-## Change client
-
-`cd client`
-
 ## Install root dependencies
 
 `npm install`
