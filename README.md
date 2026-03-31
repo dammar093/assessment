@@ -4,12 +4,7 @@ git clone :: `https://github.com/dammar093/assessment.git`
 ` cd assessment`
 
 # For frontend
-
-`git checkout master`
-
-## Change client
-
-`cd client`
+git checkout master 
 
 ## Install root dependencies
 
@@ -24,8 +19,7 @@ git clone :: `https://github.com/dammar093/assessment.git`
 `http://localhost:5173/`
 
 # Backend Run
-
-`git checkout main`
+git checkout main
 
 ## Change server
 
