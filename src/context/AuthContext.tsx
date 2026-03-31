@@ -10,6 +10,7 @@ import { api } from "../lib/axios";
 interface User {
   name: string;
   email: string;
+  role: "ADMIN" | "USER";
 }
 
 interface AuthContextType {

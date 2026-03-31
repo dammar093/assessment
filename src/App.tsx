@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute"; // adjust path
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -8,14 +9,30 @@ import AccountPage from "./pages/AccountPage";
 const App = () => {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/account" element={<AccountPage />} />
 
-      {/* <Route path="/properties/:id" element={<PropertyDetailPage />} /> */}
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
+      {/* Authenticated User Routes */}
+      <Route
+        path="/account"
+        element={
+          <ProtectedRoute>
+            <AccountPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Admin Only Routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute adminOnly={true}>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };
