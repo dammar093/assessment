@@ -1,7 +1,7 @@
 # assessment
 
 git clone :: `https://github.com/dammar093/assessment.git`
-` cd assesment`
+` cd assessment`
 
 # For frontend
 
