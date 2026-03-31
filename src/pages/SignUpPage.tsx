@@ -7,54 +7,43 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
-
-// 1️⃣ Zod schema for login validation
-const loginSchema = z.object({
+import { Link } from "react-router-dom";
+const signupSchema = z.object({
+  name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
-interface JwtPayload {
-  role: string;
-  id: string;
-}
 
-type LoginFormData = z.infer<typeof loginSchema>;
+type SignUpFormData = z.infer<typeof signupSchema>;
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = async (data: LoginFormData) => {
-    try {
-      await login(data.email, data.password);
-      const token = localStorage.getItem("token");
-      if (token) {
-        const decoded = jwtDecode<JwtPayload>(token);
-        if (decoded.role === "ADMIN") {
-          navigate("/dashboard");
-        } else {
-          navigate("/account");
-        }
-      }
-    } catch (err) {
-      console.error(err);
-    }
+  const onSubmit = (data: SignUpFormData) => {
+    console.log("Signup Data:", data);
+    // Call your API here
   };
 
   return (
-    <AuthCard title="Welcome Back!">
+    <AuthCard title="Create Account">
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        {/* Name */}
+        <div>
+          <Label>Name</Label>
+          <Input placeholder="Enter your name" {...register("name")} />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
+        </div>
+
         {/* Email */}
         <div>
           <Label>Email</Label>
@@ -93,12 +82,12 @@ const LoginPage = () => {
 
         {/* Submit Button */}
         <Button type="submit" className="w-full mt-2">
-          Login
+          Sign Up
         </Button>
 
         <div className="text-center text-sm mt-2">
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Didn't have an account? Signup
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Already have an account? Login
           </Link>
         </div>
       </form>
@@ -106,4 +95,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
