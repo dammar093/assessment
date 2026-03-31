@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "ES2023",
+    "module": "NodeNext", // ✅ Changed from ESNext
+    "rootDir": "./",
+    "outDir": "./dist",
+    "moduleResolution": "NodeNext", // ✅ Changed from bundler → works with Node.js
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Emit Options */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "removeComments": true,
+
+    /* Misc */
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src/**/*", "index.ts", "app.ts"],
+  "exclude": ["node_modules", "dist"]
+}
